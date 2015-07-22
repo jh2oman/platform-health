@@ -1,6 +1,9 @@
 <template name="upload">
 	<div class="upload">
-  <button>Click Me</button>
-  <p>You've pressed the button {{counter}} times.</p>
+  <input type="file" id="fileUpload">
+  <input type="submit" value = "Upload">
+  {{#each images}}
+  	<a href="{{this.url}}" target="_blank"><img style="width:200px;" src="{{this.url}}" alt="" class="thumbnail" /></a>
+{{/each}}
 </div>
 </template>

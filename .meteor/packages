@@ -10,5 +10,10 @@ insecure
 iron:router
 nemo64:bootstrap
 less
+<<<<<<< HEAD
 accounts-ui
 accounts-password
+=======
+cfs:standard-packages
+cfs:gridfs
+>>>>>>> 600a75a45129dbd23dcf819829f70ac355b9ee77

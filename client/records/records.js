@@ -1,6 +1,10 @@
 Session.setDefault('counter', 0);
 
   Template.records.helpers({
+    records: function () {
+      return PatientRecords.find({});
+    },
+
     counter: function () {
       return Session.get('counter');
     }
