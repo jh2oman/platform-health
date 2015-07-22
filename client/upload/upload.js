@@ -1,4 +1,4 @@
-ession.setDefault('counter', 0);
+Session.setDefault('counter', 0);
 
   Template.upload.helpers({
     counter: function () {
