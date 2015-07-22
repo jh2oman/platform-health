@@ -1,9 +1,3 @@
-Session.setDefault('counter', 0);
-
-  Template.upload.helpers({
-    counter: function () {
-      return Session.get('counter');
-
   Template.upload.helpers({
     images : function(){
       return Images.find();
