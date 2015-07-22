@@ -1,0 +1,28 @@
+<template name="outer">
+	<div class="row">
+    <div class="col-xs-3">
+      <img id="logo" src="./images/logo.png">
+    </div>
+    <div class="col-xs-9">
+      <ul id="top-nav" class="list-inline">
+        <li><h3>Profile</h3></li>
+        <li><h3>Settings</h3></li>
+        <li><h3>Requests</h3></li>
+      </ul>
+    </div>
+  </div>
+  <div class="row">
+  	<div class="col-xs-3">
+  		<div class="left-nav">
+  			<ul class="list-unstyled">
+  				<li><h4><a href="/records">Records and Files</a></h4></li>
+  				<li><h4><a href="/upload">Upload Documents</a></h4></li>
+  				<li><h4>Records and Files</h4></li>
+  			</ul>
+  		</div>
+  	</div>
+  	<div class="col-xs-9">
+  		{{> yield}}
+  	</div>
+  </div>
+</template>
