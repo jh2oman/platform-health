@@ -1,20 +1,25 @@
 <template name="records">
 	
+	{{#if currentUser}}
 		<table class="table">
 			<thead>
 				<tr>
 					<th>Record Name</th>
+					<th>Description</th>
 					<th>Uploaded By</th>
-					<th>Date Created</th>
+					<th>Date of Record</th>
+					<th>File</th>
 				</tr>
 			</thead>
 
 			<tbody>
 				{{#each records}}
 		  		<tr>
-		  			<td>{{recordName}}</td>
 		  			<td>{{name}}</td>
-		  			<td>{{createdAt}}</td>
+		  			<td>{{description}}</td>
+		  			<td>{{username}}</td>
+		  			<td>{{dateOfRecord}}</td>
+		  			<td>{{file.original.name}}</td>
 		  		</tr>
 		  		{{/each}}
 			</tbody>
@@ -22,7 +27,7 @@
 
 	<!-- Modal Button -->
 	<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">New Record</button>
-
+	{{/if}}
 
 	<!-- *********** Modal ***************-->
 	<div id="myModal" class="modal fade" role="dialog">
@@ -35,11 +40,20 @@
 		      </div>
 	      
 		      <div class="modal-body">
-		        <input id="new-record-name" type="text">
+		      	<strong>Name</strong>
+		      	<br>
+		      	<input id="new-record-name" type="text"/>
+		      	<br><br>
+		        <strong>Description</strong><br><textarea id="new-record-description" rows="4" cols="50"></textarea>
+		        <br><br>
+		        <strong>Date of Record</strong><br><input id="new-record-date" type="date">
+		        <br><br>
+		        <input id="choose-file" value="browse" type="file" class="btn btn-default">
+		        <input id="upload-file" type="submit" value="Upload" class="btn btn-default">
 		      </div>
 		      
 		      <div class="modal-footer">
-		      	<button id="add-record" type="button" class="btn btn-default" data-dismiss="modal">Add Record</button>
+		      	<button id="add-record" type="file" class="btn btn-default">Add Record</button>
 		        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
 		      </div>
 	    </div>
