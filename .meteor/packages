@@ -10,9 +10,9 @@ insecure
 iron:router
 nemo64:bootstrap
 less
-accounts-ui
-accounts-password
 cfs:standard-packages
 cfs:gridfs
-jquery
 fortawesome:fontawesome
+accounts-password
+accounts-ui
+cfs:ejson-file
