@@ -1,6 +1,20 @@
 <template name="records">
 	
 	{{#if currentUser}}
+		<label for="namefilter">Search by Record Name:</label>
+		<input id='namefilter' type='text' class='form-control' placeholder="Search by record name">
+		
+		<br>
+		<label for="filefilter">Filter by File Type:</label>
+		<select class="form-control" id="filefilter">
+			<option>All</option>
+			<option>Test Results</option>
+			<option>Medications</option>
+			<option>In-patient</option>
+			<option>Dental</option>
+			<option>Mental Health</option>
+		</select>
+		<hr>
 		<table class="table">
 			<thead>
 				<tr>
@@ -9,6 +23,8 @@
 					<th>Uploaded By</th>
 					<th>Date of Record</th>
 					<th>File</th>
+					<th>File Type</th>
+					<th></th>
 				</tr>
 			</thead>
 
@@ -20,6 +36,8 @@
 		  			<td>{{username}}</td>
 		  			<td>{{dateOfRecord}}</td>
 		  			<td>{{file.original.name}}</td>
+		  			<td>{{filetype}}</td>
+		  			<td><button style="background-color:red; color: white;" class="btn delete-task">Delete</button></td>
 		  		</tr>
 		  		{{/each}}
 			</tbody>
@@ -48,12 +66,27 @@
 		        <br><br>
 		        <strong>Date of Record</strong><br><input id="new-record-date" type="date">
 		        <br><br>
+
+		        <!-- Browse button to select the File from Finder -->
 		        <input id="choose-file" value="browse" type="file" class="btn btn-default">
+		        <br>
+
 		        <input id="upload-file" type="submit" value="Upload" class="btn btn-default">
+		      	<br><br>
+		      	<p class="upload-success">Upload Successful</p>
+
+		      	<select id="new-record-type" class="form-control">
+		      		<option>*** Choose File Type ***</option>
+		      		<option>Test Results</option>
+		      		<option>Medications</option>
+		      		<option>In-patient</option>
+		      		<option>Dental</option>
+		      		<option>Mental Health</option>
+		      	</select>
 		      </div>
 		      
 		      <div class="modal-footer">
-		      	<button id="add-record" type="file" class="btn btn-default">Add Record</button>
+		      	<button id="add-record" class="btn btn-default">Add Record</button>
 		        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
 		      </div>
 	    </div>

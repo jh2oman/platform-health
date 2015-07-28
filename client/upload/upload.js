@@ -1,6 +1,6 @@
   Template.upload.helpers({
     images : function(){
-      return Images.find();
+      return Images.find({});
     }
   });
 
