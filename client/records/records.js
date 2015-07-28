@@ -12,6 +12,7 @@
       var recDescription = $('#new-record-description').val();
       var recDate = $('#new-record-date').val();
       var myFileId = Session.get('currFile');
+      var myUrl = Session.get('url');
 
       if(!recName || !myFileId)
         alert('ERROR: Record cannot be created without a Record Name OR valid File Attachment');
@@ -21,7 +22,6 @@
         $('#new-record-name').val('');
         $('#new-record-description').val('');
         $('#new-record-date').val('');
-
         // insert the record
         PatientRecords.insert({
           name: recName,
@@ -29,6 +29,7 @@
           dateOfRecord: recDate,
           createdAt: new Date(),
           file: myFileId,
+          fileUrl : myUrl,
           owner: Meteor.userId(),
           username: Meteor.user().username
         });
@@ -39,6 +40,8 @@
     'click #upload-file': function() {
       var myFile = $('#choose-file').get(0).files[0];
       var fileObj = Images.insert(myFile); // Images is the FS collection for files
+      console.log(fileObj.url);
       Session.set('currFile', fileObj);
+      Session.set('url', fileObj.url);
     }
   });
