@@ -4,46 +4,50 @@
     records: function () {
       var fileTypeFilter = Session.setDefault('fileType', 'All');
       var nameTypeFilter = Session.setDefault('nameType', '');
+      var sortByName = Session.setDefault('sortName', 1);
 
       fileTypeFilter = Session.get('fileType');
       nameTypeFilter = Session.get('nameType');
+      sortByName = Session.get('sortName');
 
-      if (nameTypeFilter == '')
-      {
-        if (fileTypeFilter == 'All')
+
+        if (nameTypeFilter == '')
         {
-          return PatientRecords.find({username: Meteor.user().username});
-        }
-
-        else
-        {
-          return PatientRecords.find({username: Meteor.user().username, filetype: fileTypeFilter});
-        }
-      }
-
-      else
-      {
           if (fileTypeFilter == 'All')
           {
-            var n = '/.*' + nameTypeFilter + '.*/i';
-            var reg = new RegExp(n);
-            return PatientRecords.find({username: Meteor.user().username, name: new RegExp(nameTypeFilter)});
+            return PatientRecords.find({username: Meteor.user().username}, {sort: {name: sortByName}});
           }
 
           else
           {
-            var n = '/.*' + nameTypeFilter + '.*/i';
-            var reg = new RegExp(n);
-            return PatientRecords.find({username: Meteor.user().username, filetype: fileTypeFilter, name: new RegExp(nameTypeFilter)});
+            return PatientRecords.find({username: Meteor.user().username, filetype: fileTypeFilter}, {sort: {name: sortByName}});
           }
+
       }
+        else
+        {
+            if (fileTypeFilter == 'All')
+            {
+              var n = '/.*' + nameTypeFilter + '.*/i';
+              var reg = new RegExp(n);
+              return PatientRecords.find({username: Meteor.user().username, name: new RegExp(nameTypeFilter)}, {sort: {name: sortByName}});
+            }
+
+            else
+            {
+              var n = '/.*' + nameTypeFilter + '.*/i';
+              var reg = new RegExp(n);
+              return PatientRecords.find({username: Meteor.user().username, filetype: fileTypeFilter, name: new RegExp(nameTypeFilter)}, {sort: {name: sortByName}});
+            }
+        }
     },
     images : function(){
       return Images.find({});
     },
     patientImage : function(id){
       return Images.find({_id: id});
-    }
+
+      }
     // getUrl:function(){
 
     //   var record = PatientRecords.findOne(this.file._id);
@@ -112,6 +116,18 @@
     },
     'mouseleave .record-row':function(event, template){
       $(event.currentTarget).find('.share-record').toggle();
+    },
+
+    // **** SORTING *****
+    'click #sort-name': function() {
+      var sort = Session.get('sortName');
+      
+      if (sort == 1)
+        sort = -1;
+      else
+        sort = 1;
+      
+      Session.set('sortName', sort)
     }
 
   });
