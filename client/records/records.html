@@ -1,10 +1,9 @@
 <template name="records">
 
 	{{#if currentUser}}
-		<label for="namefilter">Search by Record Name:</label>
 		<input id='namefilter' type='text' class='form-control' placeholder="Search by record name">
 		
-		<br>
+		<!-- <br>
 		<label for="filefilter">Filter by File Type:</label>
 		<select class="form-control" id="filefilter">
 			<option>All</option>
@@ -14,14 +13,14 @@
 			<option>Dental</option>
 			<option>Mental Health</option>
 		</select>
-		<hr>
-		<table class="table">
+		<hr> -->
+		<table class="table table-hover">
 			<thead>
 				<tr>
 					<th>Record Name</th>
-					<th class="hidden-xs">Description</th>
+					<!-- <th>Description</th>
 					<th class="hidden-xs">Uploaded By</th>
-					<th class="hidden-xs">Date of Record</th>
+					<th class="hidden-xs">Date of Record</th> -->
 					<th>File Type</th>
 					<th></th>
 				</tr>
@@ -29,20 +28,25 @@
 
 			<tbody>
 				{{#each records}}
-		  		<tr>
-		  			<td><a href="">{{name}}</a></td>
-		  			<td class="hidden-xs">{{description}}</td>
-		  			<td class="hidden-xs">{{username}}</td>
-		  			<td class="hidden-xs">{{dateOfRecord}}</td>
+		  		<tr class="record-row">
+
+		  			<td><i class="fa fa-file-text-o document-icon"></i> 
+		  				
+		  				<a href="{{#each patientImage fileId}}{{this.url}}{{/each}}">{{name}}</a>
+		  				
+		  			</td>
 		  			<td>{{filetype}}</td>
-		  			<td><button style="background-color:red; color: white;" class="btn delete-task">Delete</button></td>
+		  			<!-- <td class="hidden-xs">{{username}}</td>
+		  			<td class="hidden-xs">{{dateOfRecord}}</td>-->		  		
+		  			<td><button class="btn btn-xs btn-info share-record">Share</button></td>
+
 		  		</tr>
 		  		{{/each}}
 			</tbody>
 		</table>
 
 	<!-- Modal Button -->
-	<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">New Record</button>
+	<button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">New Record</button>
 	{{/if}}
 
 	<!-- *********** Modal ***************-->
@@ -68,8 +72,6 @@
 		        <!-- Browse button to select the File from Finder -->
 		        <input id="choose-file" value="browse" type="file" class="btn btn-default">
 		        <br>
-
-		        <input id="upload-file" type="submit" value="Upload" class="btn btn-default">
 		      	<br><br>
 		      	<p class="upload-success">Upload Successful</p>
 
@@ -91,5 +93,4 @@
 	  </div>
 
 	</div>	
-
 </template>

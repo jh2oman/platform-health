@@ -37,6 +37,12 @@
             return PatientRecords.find({username: Meteor.user().username, filetype: fileTypeFilter, name: new RegExp(nameTypeFilter)});
           }
       }
+    },
+    images : function(){
+      return Images.find({});
+    },
+    patientImage : function(id){
+      return Images.find({_id: id});
     }
     // getUrl:function(){
 
@@ -47,18 +53,18 @@
 
   Template.records.events({
     'click #add-record': function(){
-      var myFile = $('#choose-file').get(0).files[0];
-      var myFileObj = Images.insert(myFile); // Images is the FS collection for files
-      // extract data from input fields AND insert a new record in the database
+      var file = $('#choose-file').get(0).files[0];
+      var fileObj = Images.insert(file);
+      console.log('Upload result: ', fileObj);
+      images.insert({
+        name:'image',
+        file:fileObj
+      });
+      myFileId = fileObj._id;
       var recName = $('#new-record-name').val();
       var recDescription = $('#new-record-description').val();
       var recDate = $('#new-record-date').val();
-      var myFileType = $('#new-record-type').val();
-
-      myFileId = myFileObj._id;
-      console.log(myFileObj);
-      console.log(myFileId);
-
+ var myFileType = $('#new-record-type').val();
       if(!recName || !myFileId)
         alert('ERROR: Record cannot be created without a Record Name OR valid File Attachment');
       else
@@ -77,7 +83,7 @@
           description: recDescription,
           dateOfRecord: recDate,
           createdAt: new Date(),
-          file: myFileObj,
+          fileId: myFileId,
           filetype: myFileType,
           owner: Meteor.userId(),
           username: Meteor.user().username
@@ -100,7 +106,14 @@
     'keyup #namefilter': function(event, records) {
       var newNameFilter = $('#namefilter').val();
       Session.set('nameType', newNameFilter);
+    },
+    'mouseenter .record-row':function(event, template){
+      $(event.currentTarget).find('.share-record').toggle();
+    },
+    'mouseleave .record-row':function(event, template){
+      $(event.currentTarget).find('.share-record').toggle();
     }
+
   });
   
   // // detect change in the search bar
