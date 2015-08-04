@@ -56,44 +56,7 @@
   });
 
   Template.records.events({
-    'click #add-record': function(){
-      var file = $('#choose-file').get(0).files[0];
-      var fileObj = Images.insert(file);
-      console.log('Upload result: ', fileObj);
-      images.insert({
-        name:'image',
-        file:fileObj
-      });
-      myFileId = fileObj._id;
-      var recName = $('#new-record-name').val();
-      var recDescription = $('#new-record-description').val();
-      var recDate = $('#new-record-date').val();
- var myFileType = $('#new-record-type').val();
-      if(!recName || !myFileId)
-        alert('ERROR: Record cannot be created without a Record Name OR valid File Attachment');
-      else
-      {
-        $('#myModal').modal('toggle');
-        $('#new-record-name').val('');
-        $('#new-record-description').val('');
-        $('#new-record-date').val('');
-
-        $('#new-record-type').val('*** Choose File Type ***');
-
-
-        // insert the record
-        PatientRecords.insert({
-          name: recName,
-          description: recDescription,
-          dateOfRecord: recDate,
-          createdAt: new Date(),
-          fileId: myFileId,
-          filetype: myFileType,
-          owner: Meteor.userId(),
-          username: Meteor.user().username
-        });
-      }
-    },
+    
 
 
     // delete a record
@@ -119,14 +82,18 @@
     },
 
     // **** SORTING *****
-    'click #sort-name': function() {
+    'click #sort-name': function(event, template) {
       var sort = Session.get('sortName');
       
-      if (sort == 1)
+      if (sort == 1){
         sort = -1;
-      else
+        template.$('#sort-name-arrow').removeClass('fa-angle-down').addClass('fa-angle-up');
+      }
+      else{
+        template.$('#sort-name-arrow').removeClass('fa-angle-up').addClass('fa-angle-down');
         sort = 1;
-      
+      }
+
       Session.set('sortName', sort)
     }
 

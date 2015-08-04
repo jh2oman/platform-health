@@ -4,10 +4,12 @@
       <div id="wrapper">
         <div id="sidebar-wrapper">
           <ul class="sidebar-nav">
-            <li class="sidebar-brand">Platform</li>
+            <li class="sidebar-brand"><img style="width:100px;" src="./images/logo-web-adjust.png"></li>
+            <li>
+  <button type="button" class="btn btn-info " data-toggle="modal" data-target="#myModal">New Record</button></li>
             <li><a href="" id="recordsLink">Records and Files</a></li>
-              <li><a href="" id="uploadLink">Upload File</a></li>
-              <li>Request File</li>
+              <li><a href="" id="networkLink">Your Network</a></li>
+              <li><a href="" id="messagingLink">Messaging</a></li>
               <li>Profile</li>
             <li>Settings</li>
             <li>Requests</li>
@@ -37,9 +39,11 @@
       	<div class="col-sm-3 col-xs-0">
       		<div class="left-nav">
       			<ul class="list-unstyled">
+              <!-- Modal Button -->
+  <li class="new-record-outer"><button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">New Record</button></li>
       				<li><h4><a href="/records">Records and Files</a></h4></li>
-      				<li><h4><a href="/upload">Upload Documents</a></h4></li>
-      				<li><h4>Records and Files</h4></li>
+      				<li><h4><a href="/network">Your Network</a></h4></li>
+      				<li><h4><a href="/messaging">Messaging</a></h4></li>
       			</ul>
       		</div>
       	</div>
@@ -65,7 +69,51 @@
  -->
   <!-- {{/if}} -->
 
-  
+<!-- *********** Modal ***************-->
+  <div id="myModal" class="modal fade" role="dialog">
+    
+    <div class="modal-dialog">
+      <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Add New Record</h4>
+          </div>
+        
+          <div class="modal-body">
+            <strong>Name</strong>
+            <br>
+            <input id="new-record-name" type="text"/>
+            <br><br>
+            <strong>Description</strong><br><textarea id="new-record-description" rows="4" cols="50"></textarea>
+            <br><br>
+            <strong>Date of Record</strong><br><input id="new-record-date" type="date">
+            <br><br>
+
+            <!-- Browse button to select the File from Finder -->
+            <input id="choose-file" value="browse" type="file" class="btn btn-default">
+            <br>
+            <br><br>
+            <p class="upload-success">Upload Successful</p>
+
+            <select id="new-record-type" class="form-control">
+              <option>*** Choose File Type ***</option>
+              <option>Test Results</option>
+              <option>Medications</option>
+              <option>In-patient</option>
+              <option>Dental</option>
+              <option>Mental Health</option>
+            </select>
+          </div>
+          
+          <div class="modal-footer">
+            <button id="add-record" class="btn btn-default">Add Record</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+          </div>
+      </div>
+    </div>
+
+  </div>
+
 
 
 
